@@ -38,7 +38,11 @@ def summarize_batch(summarizer, articles, max_length=80, min_length=30, batch_si
                 early_stopping=True,
             )
 
-        summaries.extend(tokenizer.batch_decode(output_ids, skip_special_tokens=True))
+        decoded = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
+        for s in decoded:
+            s = s.replace("<n>", " ").replace(" .", ".")   # PEGASUS quirks
+            s = " ".join(s.split())                         # tidy extra spaces
+            summaries.append(s)
         print(f"  summarized {min(i + batch_size, len(articles))}/{len(articles)}")
 
     return summaries
