@@ -1,0 +1,8 @@
+Method,ROUGE-1,ROUGE-2,ROUGE-L
+Lead-3,30.94,12.86,27.72
+TextRank,29.5,10.84,26.19
+T5-small (pretrained),32.19,11.76,29.05
+"T5-small (fine-tuned, ours)",33.03,13.3,29.63
+T5-base,34.52,14.43,31.35
+BART,36.12,15.5,33.12
+PEGASUS,37.88,16.04,34.56

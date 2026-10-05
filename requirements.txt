@@ -9,3 +9,4 @@ scikit-learn
 rouge_score
 sentencepiece
 accelerate
+gradio
