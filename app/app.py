@@ -11,8 +11,7 @@ _cache = {}
 
 ABSTRACTIVE = {
     "BART (facebook/bart-large-cnn)": "facebook/bart-large-cnn",
-    # Add your own model here after we upload it to the Hugging Face Hub:
-    # "T5-small fine-tuned (ours)": "YOUR_USERNAME/t5-small-cnn",
+    "T5-small fine-tuned (ours)": "Atharva151105/t5-small-cnn",
 }
 EXTRACTIVE = {"Lead-3": lead_k, "TextRank": textrank}
 
@@ -27,6 +26,8 @@ def summarize(text, mode, extractive_method, abstractive_model, num_sentences):
         return EXTRACTIVE[extractive_method](text, k=int(num_sentences))
 
     ckpt = ABSTRACTIVE[abstractive_model]
+    if "t5" in ckpt.lower():
+        text = "summarize: " + text   # the format our model was trained on
     if ckpt not in _cache:
         _cache[ckpt] = load_summarizer(ckpt)
     return summarize_batch(_cache[ckpt], [text], batch_size=1)[0]
